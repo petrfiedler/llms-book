@@ -1,0 +1,5 @@
+.venv
+
+# PDF build helper artifacts
+.build*
+.combined-*.md
