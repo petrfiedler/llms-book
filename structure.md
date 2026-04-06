@@ -1,19 +1,19 @@
 # 1. Od dopředných sítí k sekvencím
 
 ## 1.1 Kde končí školní teorie: Proč dopředné sítě na text prostě nestačí
-*Popis:* Intuitivní srovnání toho, co znáte ze školy (kde má vstup vždy přesně daný počet pixelů nebo hodnot), s reálným světem textu, kde má každá věta jinou délku. Ukážeme si, proč klasická "feed-forward" síť logicky zkolabuje, když se snaží zpracovat dynamickou sekvenci, a proč jsme museli změnit celou architekturu uvažování.
+Intuitivní srovnání toho, co znáte ze školy (kde má vstup vždy přesně daný počet pixelů nebo hodnot), s reálným světem textu, kde má každá věta jinou délku. Ukážeme si, proč klasická "feed-forward" síť logicky zkolabuje, když se snaží zpracovat dynamickou sekvenci, a proč jsme museli změnit celou architekturu uvažování.
 
 ## 1.2 Překlad z lidštiny do matematiky: Tokeny a Embeddingy
-*Popis:* Jak udělat ze slova (nebo jeho části) číslo, kterému síť rozumí. Představíme si embeddingy velmi vizuálně jako souřadnice na obrovské "mapě významů" (kde jsou král a královna blízko sebe). Jasně rozlišíme, co je **zastaralý koncept** (statický Word2Vec) a jak se to dělá dnes v **SOTA (State-of-the-Art) businessu** pomocí sub-word tokenizace (BPE) a kontextových embeddingů.
+Jak udělat ze slova (nebo jeho části) číslo, kterému síť rozumí. Představíme si embeddingy velmi vizuálně jako souřadnice na obrovské "mapě významů" (kde jsou král a královna blízko sebe). Jasně rozlišíme, co je **zastaralý koncept** (statický Word2Vec) a jak se to dělá dnes v **SOTA (State-of-the-Art) businessu** pomocí sub-word tokenizace (BPE) a kontextových embeddingů.
 
 ## 1.3 První pokus o čtení popořadě: Recurrent Neural Networks (RNN)
-*Popis:* Ukážeme si základní princip sítě, která si předává "paměť" (hidden state) z jednoho slova na druhé – jako když čtete knihu. Tuto architekturu si probereme jen jako **důležitý historický koncept**, u kterého si rovnou řekneme, proč by vás dnes z každé AI firmy vyhodili, kdybyste na něm chtěli stavět jazykový model (problém mizejícího gradientu a katastrofální zapomínání u delších textů).
+Ukážeme si základní princip sítě, která si předává "paměť" (hidden state) z jednoho slova na druhé – jako když čtete knihu. Tuto architekturu si probereme jen jako **důležitý historický koncept**, u kterého si rovnou řekneme, proč by vás dnes z každé AI firmy vyhodili, kdybyste na něm chtěli stavět jazykový model (problém mizejícího gradientu a katastrofální zapomínání u delších textů).
 
 ## 1.4 Záplata jménem LSTM (a GRU): Jak jsme chvíli opravovali neopravitelné
-*Popis:* Vysvětlení Long Short-Term Memory na jednoduchém příkladu z běžného života (představte si vyhazovače v klubu, který pouští dovnitř jen důležité informace a ty zbytečné zapomíná). Upozorníme, že ačkoliv jde o **zastaralý koncept pro generování textu**, v businessu se s ním stále můžete občas setkat u specifických úloh (např. detekce anomálií v časových řadách z průmyslových senzorů). 
+Vysvětlení Long Short-Term Memory na jednoduchém příkladu z běžného života (představte si vyhazovače v klubu, který pouští dovnitř jen důležité informace a ty zbytečné zapomíná). Upozorníme, že ačkoliv jde o **zastaralý koncept pro generování textu**, v businessu se s ním stále můžete občas setkat u specifických úloh (např. detekce anomálií v časových řadách z průmyslových senzorů). 
 
 ## 1.5 Úzké hrdlo sekvencí: Proč to všechno muselo jít do koše
-*Popis:* Závěr kapitoly, který tvoří můstek k dnešním LLM. Vysvětlíme si největší slabinu celého přístupu RNN/LSTM: nutnost počítat slova *jedno po druhém*. Ukážeme si, proč je tento sekvenční přístup noční můrou pro moderní grafické karty (GPU) za miliony dolarů, které potřebují paralelizovat, a proč průmysl nutně potřeboval přijít s úplně novým řešením (Transformers), které dnes vládne světu.
+Závěr kapitoly, který tvoří můstek k dnešním LLM. Vysvětlíme si největší slabinu celého přístupu RNN/LSTM: nutnost počítat slova *jedno po druhém*. Ukážeme si, proč je tento sekvenční přístup noční můrou pro moderní grafické karty (GPU) za miliony dolarů, které potřebují paralelizovat, a proč průmysl nutně potřeboval přijít s úplně novým řešením (Transformers), které dnes vládne světu.
 
 # 2. Transformer: Skutečný motor moderní AI
 
@@ -207,3 +207,62 @@ Jasné shrnutí technologií pro rychlou orientaci. Co už nedělat (např. tré
 
 ## 10.5 Posun k menším modelům (SLMs) a multi-agentním systémům
 Pohled za roh dnešních trendů. Proč se byznys začíná odklánět od gigantických modelů k vysoce optimalizovaným "Small Language Models" (SLMs), které běží levně a lokálně. Jak fungují sítě autonomních agentů, kteří si práci předávají mezi sebou, a jaké další objevy v blízké budoucnosti redefinují způsob, jakým dnes AI aplikace stavíme.
+
+# 11. Bonusový projekt I: Jak postavit vlastní Perplexity (Real-time Web Search Agent)
+
+V této kapitole propojíme znalosti o RAGu, agentech a optimalizaci inference. Ukážeme si, jak postavit systém, který dokáže v reálném čase analyzovat dotaz, prohledat internet, vyextrahovat relevantní informace a vygenerovat citovanou odpověď. Nejde o hračku, ale o produkční SOTA architekturu s ohledem na latenci a streaming.
+
+## 11.1 Architektura Search Agenta a Query Rewriting
+Jak funguje orchestrace celého procesu. Proč se uživatelský dotaz neposílá rovnou do vyhledávače, ale nejdříve ho rychlý model (např. Llama 3 8B nebo Claude 3 Haiku) přeformuluje do několika paralelních search queries. Ukázka promptu pro query expansion.
+
+## 11.2 Real-time vyhledávání a scraping v praxi
+Integrace s APIs jako Tavily, Bing Search nebo Serper. Jak efektivně a asynchronně scrapovat text z webových stránek, jak řešit anti-bot ochrany a jak z webového HTML rychle vysekat čistý text pro kontext modelu.
+
+## 11.3 Reranking a in-memory RAG
+Internet vrací obrovské množství textu, které se nevejde do kontextového okna (nebo by generování bylo moc drahé a pomalé). Jak aplikovat cross-encoder reranker (např. Cohere Rerank) na scrapované weby a vybrat jen ty nejrelevantnější odstavce v řádu milisekund.
+
+## 11.4 Syntéza odpovědi, citace a streaming UI
+Jak donutit model (např. GPT-4o nebo Claude 3.5 Sonnet), aby přesně citoval své zdroje. Implementace Server-Sent Events (SSE) pro streamování tokenů uživateli v reálném čase, aby aplikace působila bleskurychle (perceived latency), a jak do streamu vkládat odkazy. 
+
+## 11.5 Produkční nasazení, sémantická cache a monitoring
+Nasazení aplikace (FastAPI + React/Next.js). Využití sémantické cache (např. Redis + embeddings) pro ušetření API kreditů u často kladených dotazů. Sledování halucinací a latence pomocí nástrojů jako Langfuse nebo LangSmith.
+
+
+# 12. Bonusový projekt II: Jak postavit Copilota ve VS Code (Coding Assistant s kontextem)
+
+Praktický návod na stavbu vlastního programátorského asistenta podobného GitHub Copilotu nebo Cursoru. Naučíš se pracovat s modely trénovanými speciálně na kód, řešit Fill-in-the-Middle (FIM) doplňování a budovat kontext z obří lokální codebase.
+
+## 12.1 Výběr modelu a Fill-in-the-Middle (FIM) generování
+Jaký je rozdíl mezi chatovacím modelem a code-completion modelem (StarCoder, CodeLlama, DeepSeek Coder). Jak fungují FIM tokeny (<PRE>, <MID>, <SUF>) a jak správně poskládat prompt, aby model doplnil kód přesně tam, kde bliká kurzor.
+
+## 12.2 Budování kontextu: AST, LSP a vektorizace codebase
+Model nemůže znát celý tvůj projekt. Jak parsovat Abstract Syntax Tree (AST), jak využít Language Server Protocol (LSP) pro získání definic funkcí a jak vektorizovat lokální repozitář (lokální ChromaDB/Qdrant), aby model věděl o funkcích z jiných souborů.
+
+## 12.3 Prompt Engineering pro kód a Tree-of-Thought
+Jak strukturovat systémový prompt pro vývojářského agenta. Ukázky SOTA technik pro komplexní refactoring, kdy model nejprve napíše plán změn (Chain-of-Thought) a až poté generuje samotný kód.
+
+## 12.4 Architektura VS Code extenze a Guardrails
+Jak propojit TypeScriptovou extenzi s Python backendem. Kontrola vygenerovaného kódu proti syntax errorům předtím, než se ukáže uživateli. Ochrana proti vložení škodlivého kódu (security guardrails).
+
+## 12.5 Hostování vlastního code modelu a Continuous Batching
+Pokud nechceš platit za API, jak nasadit vlastní code model na vlastní GPU serveru. Praktická ukázka využití vLLM, Continuous Batching a FlashAttention pro dosažení stovek vygenerovaných tokenů za sekundu.
+
+
+# 13. Bonusový projekt III: Lokální AI pro pražský LegalTech startup (Privacy-First)
+
+Představ si, že pracuješ ve startupu, který analyzuje české právní smlouvy. Data jsou extrémně citlivá, nesmí opustit firmu a API OpenAI nepřipadá v úvahu. Jak postavit kompletní lokální SOTA řešení, které mluví česky a běží na firemním hardwaru.
+
+## 13.1 Výběr open-weights modelu a české specifikum
+Srovnání dostupných modelů (Llama 3 8B, Mistral Nemo, Qwen) pro češtinu. Proč už dnes nepotřebujeme nutně modely trénované výhradně v ČR, ale stačí kvalitní multilingvální base model a dobrý prompt.
+
+## 13.2 Kvantizace pro lokální běh (GGUF, AWQ, EXL2)
+Jak dostat 70B model na jeden dostupný server bez toho, abychom zruinovali startup. Detailní návod na kvantizaci modelů do 4-bit nebo 8-bit přes GGUF (pro CPU/Apple Silicon s Ollamou) a AWQ/EXL2 (pro rychlou inferenci na dedikovaných Nvidiích).
+
+## 13.3 Lokální RAG a Privacy-first Embeddingy
+Nasazení lokálního embedding modelu (např. E5-multilingual nebo BGE) pro vektorizaci dokumentů, které nikdy neopustí intranet. Architektura offline RAGu nad PostgreSQL s pgvector nebo lokální instancí Qdrantu.
+
+## 13.4 Finetuning pro doménová specifika (LoRA / QLoRA)
+Když promptování nestačí: Jak připravit dataset ze starých smluv či diagnóz a jak levně a efektivně doladit model pomocí Parameter-Efficient Fine-Tuning (PEFT) s využitím QLoRA, aniž bychom potřebovali H100 cluster.
+
+## 13.5 Ekonomika hardwaru a LLMOps pro On-Premise
+Koupit vlastní GPU rig do kanceláře, nebo pronajmout bare-metal server v EU? Rozbor nákladů (TCO). Jak řešit verzování vlastních LoRA adaptérů, audity, logování dotazů a zajištění 100% data compliance dle GDPR/AI Actu.
