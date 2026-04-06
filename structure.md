@@ -154,19 +154,22 @@ Tato podkapitola vás intuitivně provede tím, co to vlastně AI agent je. Uká
 ## 8.2 Function Calling: Jak model reálně sahá do reálného světa (State-of-the-art v byznysu)
 Tady se podíváme pod pokličku toho, jak přesně propojení s nástroji funguje na úrovni kódu. Žádná magie – model prostě místo běžného textu vygeneruje striktně formátovaný JSON s parametry pro nějakou vaši funkci (např. `vyhledej_pocasi(mesto="Praha")`). Toto je dnes naprostý standard (SOTA) a hlavní způsob, jakým firmy integrují LLM do svých interních systémů, CRM a databází.
 
-## 8.3 Anatomie rozhodování: ReAct a další myšlenkové rámce (Důležitý koncept)
+## 8.3 Constrained Decoding: Jak přinutit model mluvit v JSONu
+Logické navázání na Function Calling. Intuitivní vysvětlení problému, kdy běžný model místo čistého JSONu odpoví „Jasně, tady je váš JSON:“ a shodí tím celou produkční aplikaci. Ukážeme si, jak funguje maskování pravděpodobností na úrovni tokenů pomocí konečných automatů (FSM), díky kterému model fyzicky nemůže vygenerovat nevalidní formát. Zmíníme byznys SOTA řešení jako Structured Outputs (OpenAI) a open-source knihovny (Outlines, XGrammar) pro 100% spolehlivé agenty.
+
+## 8.4 Anatomie rozhodování: ReAct a další myšlenkové rámce (Důležitý koncept)
 ReAct (Reasoning + Acting) je koncept, který odstartoval agentní revoluci. Ačkoliv dnes už modely zvládají volání funkcí nativně a čistý textový ReAct je mírně zastaralý, je to naprosto klíčový koncept pro pochopení toho, jak donutit model "přemýšlet nahlas" předtím, než provede nějakou akci. Ukážeme si, proč tohle "zastavení se a zamyšlení" radikálně snižuje chybovost.
 
-## 8.4 Code Interpreter: LLM jako datový analytik a programátor (Nejsilnější současný trend)
+## 8.5 Code Interpreter: LLM jako datový analytik a programátor (Nejsilnější současný trend)
 Když LLM neumí spočítat složitou rovnici nebo analyzovat obří Excel, necháme ho, ať si na to napíše Python skript a sám si ho spustí v izolovaném prostředí (sandboxu). Detailně si rozebereme, jak tento mechanismus (známý z ChatGPT nebo Claude) funguje v praxi, a proč je to momentálně to nejspolehlivější, co můžete v analytickém byznysu nasadit.
 
-## 8.5 Agenti s přístupem na web: Automatický průzkumník
+## 8.6 Agenti s přístupem na web: Automatický průzkumník
 Jak funguje Perplexity nebo webový agent? Není to jen RAG (vyhledávání ve vlastních datech), ale schopnost modelu samostatně formulovat dotazy pro Google/Bing, pročítat výsledky, klikat na odkazy a syntetizovat odpověď. Ukážeme si, jaké to má technické překážky a proč je web scraping pro agenty tak složitý.
 
-## 8.6 Multi-agentní systémy: Když si AI povídá s AI (Potenciál do budoucna)
+## 8.7 Multi-agentní systémy: Když si AI povídá s AI (Potenciál do budoucna)
 Co se stane, když postavíte tým specialistů – jedno LLM bude mít roli programátora, druhé roli testera a třetí roli manažera? Představíme si frameworky jako CrewAI nebo AutoGen. Zdůrazníme si ale, že ačkoliv je to obrovský hype a hudba budoucnosti, v tvrdé byznysové praxi se to dnes zatím často hroutí do nekonečných smyček a dává se přednost spíše striktním, předem daným procesům (tzv. state machines).
 
-## 8.7 Bezpečnost, spolehlivost a "Human-in-the-loop" (Praktická realita)
+## 8.8 Bezpečnost, spolehlivost a "Human-in-the-loop" (Praktická realita)
 Když dáte modelu přístup k nástrojům, může vám smazat produkční databázi nebo odeslat nesmyslný e-mail tisícům klientů. V této podkapitole probereme reálnou podnikovou praxi: proč se plně autonomní agenti v byznysu (zatím) nepoužívají, co je to "Human-in-the-loop" (člověk jako schvalovatel akcí) a jak ošetřit "halucinace", když model zavolá neexistující funkci.
 
 # 9. Bezpečnost, evaluace a limity modelů
